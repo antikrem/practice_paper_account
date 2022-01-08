@@ -12,16 +12,24 @@ def read_input(command, account):
     #Get first word
     command = split[0]
     match command:
+
         #Buy Action
         case 'BUY':
             bought_stock = split[1]
-            account.buy(bought_stock)
-            print(account)
+            quantity = int(split[2])
+            account.buy(bought_stock, quantity)
+            #print(account)
+
         #Sell Action
         case 'SELL':
             sold_stock = split[1]
             account.sell(sold_stock)
+            #print(account)
+
+        #Check account
+        case 'CHECK':
             print(account)
+
         #No Command Found
         case _:
             print('Invalid Command \n')
