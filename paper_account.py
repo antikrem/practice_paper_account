@@ -7,13 +7,12 @@ class paper_account:
         self.balance = balance
         self.stocks = []
 
-    def __repr__(self):
-        assets = 0;
+    def calculate_stock_worth(self):
+        assets = 0
         for stock in self.stocks:
             ticker = yf.Ticker(stock)
             assets += ticker.info["regularMarketPrice"]
-
-        return 'Account %s has: $%s \nis worth $%s \nand is invested in %s' % (self.name, self.balance, assets, self.stocks)
+        return assets
 
     def buy(self, stock):
         ticker = yf.Ticker(stock)
@@ -26,3 +25,7 @@ class paper_account:
         price = ticker.info["regularMarketPrice"]
         self.balance += price
         self.stocks.remove(stock)
+
+    def __repr__(self):
+        assets = self.calculate_stock_worth();
+        return 'Account %s has: $%s \nis worth $%s \nand is invested in %s' % (self.name, self.balance, assets, self.stocks)
