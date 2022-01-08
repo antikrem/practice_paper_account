@@ -20,3 +20,9 @@ class paper_account:
         price = ticker.info["regularMarketPrice"]
         self.balance -= price
         self.stocks.append(stock)
+
+    def sell(self, stock):
+        ticker = yf.Ticker(stock)
+        price = ticker.info["regularMarketPrice"]
+        self.balance += price
+        self.stocks.remove(stock)

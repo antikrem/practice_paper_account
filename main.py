@@ -8,14 +8,19 @@ import paper_account as acc
 def read_input(command, account):
 
     #Split Command and inputs
-    split = command.split(' ')
+    split = command.upper().split(' ')
     #Get first word
     command = split[0]
     match command:
         #Buy Action
-        case 'buy':
+        case 'BUY':
             bought_stock = split[1]
             account.buy(bought_stock)
+            print(account)
+        #Sell Action
+        case 'SELL':
+            sold_stock = split[1]
+            account.sell(sold_stock)
             print(account)
         #No Command Found
         case _:
