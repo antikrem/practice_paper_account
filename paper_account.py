@@ -8,8 +8,9 @@ class paper_account:
         self.balance = balance
         self.stocks = []
 
-    def calculate_stock_worth(self):
 
+
+    def calculate_stock_worth(self):
         #Initialize stock names, quantity and total asset price
         assets = 0
         stock_names = []
@@ -28,14 +29,13 @@ class paper_account:
             assets += tickers.tickers[stock].info["regularMarketPrice"] * int(quantity)
         return assets
 
-    def buy(self, stock, quantity):
 
+
+    def buy(self, stock, quantity):
         #Pull ticker info
         ticker = yf.Ticker(stock)
         price = ticker.info["regularMarketPrice"]
 
-        #Take money
-        self.balance -= price * int(quantity)
 
         #Check for pre-existing stock
         is_in_list = False
@@ -50,17 +50,32 @@ class paper_account:
             obj_stock = st.stock(stock, price, quantity)
             self.stocks.append(obj_stock)
 
-    def sell(self, stock):
+        #Take money
+        self.balance -= price * int(quantity)
 
+
+
+    def sell(self, stock, quantity):
         #Pull ticker info
         ticker = yf.Ticker(stock)
         price = ticker.info["regularMarketPrice"]
 
-        #Give money
-        self.balance += price
+        #Loop through stock list
+        i = 0
+        for stocks in self.stocks:
+            if stock == stocks.ticker:
+                if stocks.quantity > quantity:
+                    stocks.remove_position(price, quantity)
+                elif stocks.quantity == quantity:
+                    self.stocks.pop(i)
+                else:
+                    print("Oversold")
+            i += 1
 
-        #Remove stock
-        self.stocks.remove(stock)
+        #Give money
+        self.balance += price * int(quantity)
+
+
 
     def __repr__(self):
         assets = self.calculate_stock_worth()

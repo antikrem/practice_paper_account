@@ -16,7 +16,7 @@ def read_input(command, account):
         #Buy Action
         case 'BUY':
             bought_stock = split[1]
-            quantity = int(split[2])
+            quantity = split[2]
             account.buy(bought_stock, quantity)
             #print(account)
 
