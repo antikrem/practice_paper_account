@@ -1,7 +1,6 @@
 class stock:
 
-    def __init__(self, name, cost, quantity):
-        self.ticker = name
+    def __init__(self, cost, quantity):
         self.quantity = int(quantity)
         self.dca = float(cost)
 

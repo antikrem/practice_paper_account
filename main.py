@@ -17,13 +17,14 @@ def read_input(command, account):
         case 'BUY':
             bought_stock = split[1]
             quantity = split[2]
-            account.buy(bought_stock, quantity)
+            account.buy(bought_stock, int(quantity))
             #print(account)
 
         #Sell Action
         case 'SELL':
             sold_stock = split[1]
-            account.sell(sold_stock)
+            quantity = split[2]
+            account.sell(sold_stock, int(quantity))
             #print(account)
 
         #Check account
