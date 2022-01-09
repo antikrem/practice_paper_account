@@ -58,4 +58,4 @@ class paper_account:
         stocks = list(self.stocks.keys())
         for stock in self.stocks:
             quantity.append(self.stocks.get(stock).quantity)
-        return 'Account %s has: $%s \nis worth $%s \nand is invested in %s \nat %s quantity' % (self.name, self.balance, assets, stocks, quantity)
+        return f'Account {self.name} has: {self.balance} \nis worth ${assets} \nand is invested in {stocks} \nat {quantity} quantity'
